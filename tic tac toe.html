@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tic Tac Toe</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+</head>
+<body>
+  <div class="game-container">
+    <div class="header">
+      <h1 class="title">Tic Tac Toe</h1>
+      
+      <div class="controls">
+        <button class="btn" id="gameMode">Play vs Computer</button>
+        <select class="btn" id="difficulty" style="display: none;">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button class="btn" id="sound">🔊</button>
+        <button class="btn" id="history">📜</button>
+        <button class="btn" id="editNames">Edit Names</button>
+      </div>
+
+      <div class="name-inputs" id="nameInputs">
+        <input type="text" class="name-input" id="playerXName" placeholder="Player X Name" />
+        <input type="text" class="name-input" id="playerOName" placeholder="Player O Name" />
+        <button class="btn" id="saveNames">Save</button>
+      </div>
+
+      <div class="scores">
+        <div class="score-item" id="scoreX">Player X: 0</div>
+        <div class="score-item" id="scoreTies">Ties: 0</div>
+        <div class="score-item" id="scoreO">Player O: 0</div>
+      </div>
+    </div>
+
+    <div class="board" id="board">
+      <button class="cell" data-index="0"></button>
+      <button class="cell" data-index="1"></button>
+      <button class="cell" data-index="2"></button>
+      <button class="cell" data-index="3"></button>
+      <button class="cell" data-index="4"></button>
+      <button class="cell" data-index="5"></button>
+      <button class="cell" data-index="6"></button>
+      <button class="cell" data-index="7"></button>
+      <button class="cell" data-index="8"></button>
+      <div class="signature">game design by @ASK</div>
+    </div>
+
+    <div class="history-panel" id="historyPanel">
+      <h2>Game History</h2>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- Win Modal with enhanced animations and effects -->
+  <div class="modal" id="winModal">
+    <div class="modal-content">
+      <div class="celebration-ribbon"></div>
+      <div class="trophy-icon">🏆</div>
+      <h2 class="win-text" id="winnerText"></h2>
+      <div class="confetti-canvas" id="confetti-canvas"></div>
+      <button class="btn" id="playAgain">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Link to external JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

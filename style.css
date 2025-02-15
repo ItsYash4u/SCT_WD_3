@@ -1,0 +1,340 @@
+/* Global Reset & Root Variables */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #4a148c;
+  --secondary: #6a1b9a;
+  --accent: #8e24aa;
+  --text: #ffffff;
+}
+
+/* Keyframe Animations */
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 5px #4caf50; }
+  50% { box-shadow: 0 0 20px #4caf50; }
+  100% { box-shadow: 0 0 5px #4caf50; }
+}
+
+@keyframes dropIn {
+  0% {
+    transform: translateY(-1000px) rotate(-20deg);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(50px) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glitter {
+  0% { transform: rotate(45deg) translate(-50%, -50%); }
+  100% { transform: rotate(45deg) translate(150%, 150%); }
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Body & Container */
+body {
+  background: var(--primary);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Header & Controls */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Score Board */
+.scores {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  padding: 15px;
+  background: var(--secondary);
+  border-radius: 10px;
+}
+
+.score-item {
+  text-align: center;
+  padding: 10px;
+}
+
+/* Board & Cells */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 15px;
+  background: var(--secondary);
+  border-radius: 15px;
+  position: relative;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell:hover {
+  background: #9c27b0;
+}
+
+.cell.winner {
+  background: #4caf50;
+  animation: pulse 1s infinite;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--secondary);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  animation: dropIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Win Modal Components */
+.trophy-icon {
+  font-size: 4em;
+  margin-bottom: 20px;
+  color: gold;
+  position: relative;
+  overflow: hidden;
+}
+
+.trophy-icon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.8) 50%, transparent 75%);
+  animation: glitter 2s infinite;
+}
+
+.win-text {
+  font-size: 2em;
+  margin: 20px 0;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  animation: bounce 1s infinite;
+}
+
+/* Confetti Canvas */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+/* Celebration Effects */
+.celebration-ribbon {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 40px;
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background-size: 200% 200%;
+  animation: rainbow 2s linear infinite;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.celebration-star {
+  position: absolute;
+  animation: starTwinkle 1s ease infinite;
+  color: gold;
+  font-size: 20px;
+}
+
+/* History Panel & Name Inputs */
+.history-panel {
+  display: none;
+  background: var(--secondary);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  background: var(--accent);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+.name-inputs {
+  display: none;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.name-input {
+  padding: 8px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Signature */
+.signature {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 10px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .board {
+    gap: 5px;
+    padding: 10px;
+  }
+  .cell {
+    font-size: 2rem;
+  }
+  .scores {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .board {
+    max-width: 300px;
+  }
+  .cell {
+    font-size: 1.5rem;
+  }
+}
